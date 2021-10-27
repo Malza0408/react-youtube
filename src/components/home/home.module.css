@@ -1,0 +1,13 @@
+.videoList {
+  /* background-color: var(--color-dark-grey); */
+  background-color: white;
+  width: 90%;
+  height: 100vh;
+  margin: 2rem auto 0 auto;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
