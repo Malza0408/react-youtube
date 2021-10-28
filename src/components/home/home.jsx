@@ -6,13 +6,14 @@ import Video from '../video/video';
 const Home = props => {
   const [params] = useState({
     part: 'snippet, statistics',
-    maxResults: 10,
+    maxResults: 1,
     key: 'AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc',
-    fields: 'items(snippet(thumbnails, publishedAt))',
-    // 'items(snippet(title, thumbnails, channelTitle, publishedAt),statistics(viewCount))',
+    fields:
+      'items(snippet(title, thumbnails, channelTitle, publishedAt, channelId),statistics(viewCount))',
     chart: 'mostPopular',
   });
   const [videos, setVideos] = useState([]);
+  const [videosID, setVideiosID] = useState({});
 
   useEffect(() => {
     const getMostPopularVideo = async () => {
@@ -32,6 +33,9 @@ const Home = props => {
   const generateKey = publishedAt => {
     return `${publishedAt}_${new Date().getTime()}`;
   };
+  const getChannelID = ID => {
+    console.log(ID);
+  };
 
   return (
     <>
@@ -41,7 +45,8 @@ const Home = props => {
             <Video
               key={generateKey(video.snippet.publishedAt)}
               snippet={video.snippet}
-              // statistics={video.statistics}
+              statistics={video.statistics}
+              sendChannelID={getChannelID}
             />
           ))}
         </ul>

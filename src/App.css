@@ -16,6 +16,10 @@ body {
   min-height: 100vh;
 }
 
+p {
+  margin: 0;
+}
+
 li {
   list-style: none;
 }
