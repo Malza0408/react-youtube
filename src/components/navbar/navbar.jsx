@@ -1,43 +1,19 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef } from 'react';
 import styles from './navbar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
 import { withRouter } from 'react-router';
 
-axios.defaults.baseURL = 'https://www.googleapis.com/youtube/v3';
-
 const Navbar = props => {
-  const [params, setParams] = useState({
-    part: 'snippet, statistics',
-    maxResults: 2,
-    q: '싹쓰리',
-    key: 'AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc',
-    fields:
-      'items(snippet(title, thumbnails, channelTitle, publishedAt),statistics(viewCount))',
-    chart: 'mostPopular',
-  });
   const inputRef = createRef();
 
   const handleSubmit = event => {
-    event.preventDefault();
     const q = inputRef.current.value;
-    q && setParams(params => (params = { ...params, q }));
-    props.history.push('/watch');
+    console.log(q);
+    q && props.search(q);
+    // console.log(search);
+    // props.history.push('/watch');
+    event.preventDefault();
   };
-
-  // useEffect(() => {
-  //   const serach = async () => {
-  //     const res = await axios
-  //       .get('/videos', { params })
-  //       .then(response => {
-  //         // console.log(JSON.stringify(response.data));
-  //         localStorage.setItem('youtube', JSON.stringify(response.data));
-  //       })
-  //       .catch(error => console.log(error));
-  //   };
-
-  //   serach();
-  // }, [params]);
 
   return (
     <nav className={styles.navbar}>

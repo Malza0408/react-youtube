@@ -14,7 +14,7 @@ const Video = props => {
   };
 
   const sendChannelID = () => {
-    props.sendChannelID(props.snippet.channelId);
+    // props.sendChannelID(props.snippet.channelId);
   };
   return (
     <article className={styles.video_card} onClick={sendChannelID}>
