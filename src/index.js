@@ -6,10 +6,10 @@ import { BrowserRouter } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/js/all.js';
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -10,8 +10,6 @@ const Navbar = props => {
     const q = inputRef.current.value;
     console.log(q);
     q && props.search(q);
-    // console.log(search);
-    // props.history.push('/watch');
     event.preventDefault();
   };
 

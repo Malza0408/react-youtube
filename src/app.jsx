@@ -1,7 +1,7 @@
 import './app.css';
 import Home from './components/home/home';
-import Watch from './components/watch';
-import { Route, Switch } from 'react-router-dom';
+import SearchResult from './components/searchResult/searchResult';
+import { useHistory, Route, Switch } from 'react-router-dom';
 import NotFound from './components/notFound';
 import Navbar from './components/navbar/navbar';
 import { useState } from 'react/cjs/react.development';
@@ -10,7 +10,9 @@ import { map } from 'lodash';
 
 function App() {
   const [videos, setVideos] = useState([]);
-  const maxResults = 8;
+  const [searchList, setSearchList] = useState([]);
+  const maxResults = 6;
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchVideos() {
@@ -46,7 +48,6 @@ function App() {
       .then(response => response.json())
       .then(result => {
         const videoList = map(result.items, 'id.videoId').join();
-        console.log(videoList);
         (async function fetchVideos() {
           const requestOptions = {
             method: 'GET',
@@ -59,8 +60,8 @@ function App() {
           )
             .then(response => response.json())
             .then(result => {
-              setVideos(result.items);
-              console.log(videos);
+              setSearchList(result.items);
+              history.push('/searchResult');
             })
             .catch(error => console.log('error', error));
         })();
@@ -68,12 +69,52 @@ function App() {
       .catch(error => console.log('error', error));
   };
 
+  const generateKey = publishedAt => {
+    return `${publishedAt}_${new Date().getTime() + Math.random()}`;
+  };
+
+  const handleViewCount = viewCount => {
+    if (viewCount < 10000) {
+      viewCount /= 1000;
+      viewCount = Math.floor(viewCount);
+      return `${viewCount}천회`;
+    }
+    viewCount /= 10000;
+    viewCount = Math.floor(viewCount);
+
+    if (viewCount > 10000) {
+      viewCount /= 10000;
+      viewCount = Math.floor(viewCount);
+      return `${viewCount}억회`;
+    }
+    return `${viewCount}만회`;
+  };
+
   return (
     <>
       <Navbar search={search} />
       <Switch>
-        <Route path="/" exact render={() => <Home videos={videos} />} />
-        <Route path="/watch" component={Watch} />
+        <Route
+          path="/"
+          exact
+          render={() => (
+            <Home
+              videos={videos}
+              generateKey={generateKey}
+              handleViewCount={handleViewCount}
+            />
+          )}
+        />
+        <Route
+          path="/searchResult"
+          render={() => (
+            <SearchResult
+              searchResult={searchList}
+              generateKey={generateKey}
+              handleViewCount={handleViewCount}
+            />
+          )}
+        />
         <Route component={NotFound}></Route>
       </Switch>
     </>
