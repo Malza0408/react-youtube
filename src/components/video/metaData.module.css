@@ -6,6 +6,12 @@
   -webkit-box-orient: vertical;
 }
 
+.channelTitle,
+.viewCount,
+.publishedDate {
+  color: var(--color-dark-white);
+}
+
 .channelTitle.regular,
 .viewCount.regular,
 .publishedDate.regular {
@@ -30,6 +36,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  color: var(--color-dark-white);
 }
 
 .show {

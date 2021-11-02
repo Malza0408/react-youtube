@@ -2,7 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-light-black);
+  background-color: var(--color-grey);
+  padding: 0.2rem 0.4rem 0.3rem 0.4rem;
+  border-bottom: 1px solid var(--color-light-grey);
 }
 
 .logo {
@@ -36,9 +38,9 @@
   height: 100%;
   font-size: 1rem;
   padding: 0 0.3rem;
-  background-color: var(--color-dark-grey);
+  background-color: var(--color-light-black);
   color: var(--color-white);
-  border: solid 1px var(--color-grey);
+  border: solid 1px var(--color-light-grey);
   outline: none;
 }
 
@@ -49,7 +51,7 @@
 .inputBtn {
   width: 4rem;
   height: 100%;
-  background-color: var(--color-grey);
+  background-color: var(--color-light-grey);
 }
 
 .logIn {

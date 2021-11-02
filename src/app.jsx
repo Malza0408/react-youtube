@@ -57,7 +57,7 @@ function App() {
           };
 
           await fetch(
-            `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&fields=items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount))&id=${videoList}&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
+            `https://youtube.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&fields=items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount),id)&id=${videoList}&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
             requestOptions,
           )
             .then(response => response.json())
@@ -76,7 +76,6 @@ function App() {
   };
 
   const selectVideo = video => {
-    console.log(video);
     setSelectedVideo(video);
     history.push('/playVideo');
   };
@@ -98,6 +97,11 @@ function App() {
     return `${viewCount}만회`;
   };
 
+  const handleDate = date => {
+    const publishedDate = new Date(date);
+    return `${publishedDate.getFullYear()}년 ${publishedDate.getMonth()}월 ${publishedDate.getDate()}일`;
+  };
+
   return (
     <>
       <Navbar search={search} />
@@ -111,6 +115,7 @@ function App() {
               generateKey={generateKey}
               handleViewCount={handleViewCount}
               selectVideo={selectVideo}
+              handleDate={handleDate}
             />
           )}
         />
@@ -121,6 +126,8 @@ function App() {
               searchResult={searchList}
               generateKey={generateKey}
               handleViewCount={handleViewCount}
+              selectVideo={selectVideo}
+              handleDate={handleDate}
             />
           )}
         />
@@ -133,6 +140,7 @@ function App() {
               generateKey={generateKey}
               selectVideo={selectVideo}
               handleViewCount={handleViewCount}
+              handleDate={handleDate}
             />
           )}
         />

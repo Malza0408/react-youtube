@@ -2,7 +2,13 @@ import React from 'react';
 import MetaData from '../video/metaData';
 import styles from './searchResult.module.css';
 
-const AfterSearch = ({ searchResult, generateKey, handleViewCount }) => {
+const AfterSearch = ({
+  searchResult,
+  generateKey,
+  handleViewCount,
+  selectVideo,
+  handleDate,
+}) => {
   return (
     <>
       <section className={styles.searchResult}>
@@ -12,6 +18,7 @@ const AfterSearch = ({ searchResult, generateKey, handleViewCount }) => {
               <li
                 className={styles.videoCard}
                 key={generateKey(video.snippet.publishedAt)}
+                onClick={() => selectVideo(video)}
               >
                 <img
                   className={styles.thumbnails}
@@ -25,6 +32,7 @@ const AfterSearch = ({ searchResult, generateKey, handleViewCount }) => {
                   fontSize={'samll'}
                   display={'margin'}
                   description={'show'}
+                  handleDate={handleDate}
                 />
               </li>
             ))}

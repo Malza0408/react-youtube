@@ -1,9 +1,14 @@
 import React from 'react';
 import styles from './home.module.css';
-// import axios from 'axios';
 import MetaData from '../video/metaData';
 
-const Home = ({ videos, generateKey, handleViewCount, selectVideo }) => {
+const Home = ({
+  videos,
+  generateKey,
+  handleViewCount,
+  selectVideo,
+  handleDate,
+}) => {
   return (
     <>
       <section className={styles.home}>
@@ -24,6 +29,7 @@ const Home = ({ videos, generateKey, handleViewCount, selectVideo }) => {
                 statistics={video.statistics}
                 handleViewCount={handleViewCount}
                 fontSize={'regular'}
+                handleDate={handleDate}
               />
             </li>
           ))}

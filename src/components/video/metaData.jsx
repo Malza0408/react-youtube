@@ -8,11 +8,13 @@ const MetaData = ({
   fontSize,
   display,
   description,
+  handleDate,
 }) => {
   const font = fontSize === `regular` ? styles.regular : styles.small;
   const displayType =
     display === 'margin' ? styles.haveMargin : styles.haveNone;
   const showDescription = description === 'show' ? styles.show : styles.hidden;
+
   return (
     <>
       <div className={styles.metaData}>
@@ -24,7 +26,7 @@ const MetaData = ({
           조회수 {handleViewCount(statistics.viewCount)}
         </p>
         <p className={`${styles.publishedDate} ${font}`}>
-          {snippet.publishedAt}
+          {handleDate(snippet.publishedAt)}
         </p>
         <span className={`${styles.description} ${showDescription}`}>
           {snippet.description}
