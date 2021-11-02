@@ -22,6 +22,9 @@ const AfterSearch = ({ searchResult, generateKey, handleViewCount }) => {
                   snippet={video.snippet}
                   statistics={video.statistics}
                   handleViewCount={handleViewCount}
+                  fontSize={'samll'}
+                  display={'margin'}
+                  description={'show'}
                 />
               </li>
             ))}

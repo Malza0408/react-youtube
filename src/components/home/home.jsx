@@ -12,7 +12,7 @@ const Home = ({ videos, generateKey, handleViewCount, selectVideo }) => {
             <li
               className={styles.videoCard}
               key={generateKey(video.snippet.publishedAt)}
-              onClick={() => selectVideo(video.id)}
+              onClick={() => selectVideo(video)}
             >
               <img
                 className={styles.thumbnails}
@@ -23,6 +23,7 @@ const Home = ({ videos, generateKey, handleViewCount, selectVideo }) => {
                 snippet={video.snippet}
                 statistics={video.statistics}
                 handleViewCount={handleViewCount}
+                fontSize={'regular'}
               />
             </li>
           ))}

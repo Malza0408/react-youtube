@@ -1,19 +1,19 @@
 import './app.css';
-import Home from './components/home/home';
-import SearchResult from './components/searchResult/searchResult';
 import { useHistory, Route, Switch } from 'react-router-dom';
-import NotFound from './components/notFound';
-import Navbar from './components/navbar/navbar';
 import { useState } from 'react/cjs/react.development';
 import { useEffect } from 'react';
 import { map } from 'lodash';
+import Navbar from './components/navbar/navbar';
+import Home from './components/home/home';
+import SearchResult from './components/searchResult/searchResult';
 import PlayVideo from './components/playVideo/playVideo';
+import NotFound from './components/notFound';
 
 function App() {
   const [videos, setVideos] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const maxResults = 1;
+  const maxResults = 12;
   const history = useHistory();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function App() {
       };
 
       await fetch(
-        `https://youtube.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&chart=mostPopular&maxResults=${maxResults}&fields=items(snippet(title, thumbnails, channelTitle, publishedAt),statistics(viewCount), id)&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
+        `https://youtube.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&chart=mostPopular&maxResults=${maxResults}&fields=items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount), id)&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
         requestOptions,
       )
         .then(response => response.json())
@@ -57,7 +57,7 @@ function App() {
           };
 
           await fetch(
-            `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&fields=items(snippet(title, thumbnails, channelTitle, publishedAt),statistics(viewCount))&id=${videoList}&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
+            `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&fields=items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount))&id=${videoList}&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
             requestOptions,
           )
             .then(response => response.json())
@@ -75,9 +75,9 @@ function App() {
     return `${publishedAt}_${new Date().getTime() + Math.random()}`;
   };
 
-  const selectVideo = videoID => {
-    console.log(videoID);
-    setSelectedVideo(videoID);
+  const selectVideo = video => {
+    console.log(video);
+    setSelectedVideo(video);
     history.push('/playVideo');
   };
 
@@ -126,7 +126,15 @@ function App() {
         />
         <Route
           path="/playVideo"
-          render={() => <PlayVideo videoID={selectedVideo} />}
+          render={() => (
+            <PlayVideo
+              videos={videos}
+              video={selectedVideo}
+              generateKey={generateKey}
+              selectVideo={selectVideo}
+              handleViewCount={handleViewCount}
+            />
+          )}
         />
         <Route component={NotFound}></Route>
       </Switch>

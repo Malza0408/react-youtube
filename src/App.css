@@ -6,6 +6,9 @@
   --color-dark-grey: #141414;
   --color-white: #ffffff;
   --color-skyblue: #319af0;
+
+  --font-size-regular: 16px;
+  --font-size-small: 14px;
 }
 
 * {

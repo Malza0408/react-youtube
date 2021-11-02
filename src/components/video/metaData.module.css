@@ -5,3 +5,37 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+.channelTitle.regular,
+.viewCount.regular,
+.publishedDate.regular {
+  font-size: var(--font-size-regular);
+}
+
+.channelTitle.small,
+.viewCount.small,
+.publishedDate.small {
+  font-size: var(--font-size-small);
+}
+
+.haveMargin {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.description {
+  margin-top: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.show {
+  visibility: visible;
+}
+
+.hidden {
+  display: none;
+}
