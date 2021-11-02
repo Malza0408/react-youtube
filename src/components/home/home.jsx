@@ -3,7 +3,7 @@ import styles from './home.module.css';
 // import axios from 'axios';
 import MetaData from '../video/metaData';
 
-const Home = ({ videos, generateKey, handleViewCount }) => {
+const Home = ({ videos, generateKey, handleViewCount, selectVideo }) => {
   return (
     <>
       <section className={styles.home}>
@@ -12,6 +12,7 @@ const Home = ({ videos, generateKey, handleViewCount }) => {
             <li
               className={styles.videoCard}
               key={generateKey(video.snippet.publishedAt)}
+              onClick={() => selectVideo(video.id)}
             >
               <img
                 className={styles.thumbnails}

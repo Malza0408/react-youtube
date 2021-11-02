@@ -7,11 +7,13 @@ import Navbar from './components/navbar/navbar';
 import { useState } from 'react/cjs/react.development';
 import { useEffect } from 'react';
 import { map } from 'lodash';
+import PlayVideo from './components/playVideo/playVideo';
 
 function App() {
   const [videos, setVideos] = useState([]);
   const [searchList, setSearchList] = useState([]);
-  const maxResults = 6;
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const maxResults = 1;
   const history = useHistory();
 
   useEffect(() => {
@@ -22,7 +24,7 @@ function App() {
       };
 
       await fetch(
-        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&maxResults=${maxResults}&fields=items(snippet(title, thumbnails, channelTitle, publishedAt),statistics(viewCount))&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
+        `https://youtube.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&chart=mostPopular&maxResults=${maxResults}&fields=items(snippet(title, thumbnails, channelTitle, publishedAt),statistics(viewCount), id)&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
         requestOptions,
       )
         .then(response => response.json())
@@ -73,6 +75,12 @@ function App() {
     return `${publishedAt}_${new Date().getTime() + Math.random()}`;
   };
 
+  const selectVideo = videoID => {
+    console.log(videoID);
+    setSelectedVideo(videoID);
+    history.push('/playVideo');
+  };
+
   const handleViewCount = viewCount => {
     if (viewCount < 10000) {
       viewCount /= 1000;
@@ -102,6 +110,7 @@ function App() {
               videos={videos}
               generateKey={generateKey}
               handleViewCount={handleViewCount}
+              selectVideo={selectVideo}
             />
           )}
         />
@@ -114,6 +123,10 @@ function App() {
               handleViewCount={handleViewCount}
             />
           )}
+        />
+        <Route
+          path="/playVideo"
+          render={() => <PlayVideo videoID={selectedVideo} />}
         />
         <Route component={NotFound}></Route>
       </Switch>
