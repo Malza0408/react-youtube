@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react/cjs/react.development';
-import MetaData from '../video/metaData';
+import VideoCard from '../video/videoCard';
 import styles from './playVideo.module.css';
 
 const PlayVideo = ({
@@ -10,6 +10,8 @@ const PlayVideo = ({
   handleViewCount,
   selectVideo,
   handleDate,
+  videoCardSetting,
+  thumbSize,
 }) => {
   const [toggle, setToggle] = useState('false');
 
@@ -61,20 +63,15 @@ const PlayVideo = ({
               key={generateKey(video.snippet.publishedAt)}
               onClick={() => selectVideo(video)}
             >
-              <img
-                className={styles.thumbnails}
-                src={video.snippet.thumbnails.medium.url}
-                alt="video_thumbnail"
+              <VideoCard
+                snippet={video.snippet}
+                statistics={video.statistics}
+                handleViewCount={handleViewCount}
+                fontSize={'small'}
+                handleDate={handleDate}
+                videoCardSetting={videoCardSetting}
+                thumbSize={thumbSize}
               />
-              <div className={styles.metaData}>
-                <MetaData
-                  snippet={video.snippet}
-                  statistics={video.statistics}
-                  handleViewCount={handleViewCount}
-                  fontSize={'small'}
-                  handleDate={handleDate}
-                />
-              </div>
             </li>
           ))}
         </ul>

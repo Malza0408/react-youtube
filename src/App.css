@@ -18,6 +18,9 @@
 }
 
 body {
+  /* margin-right: 1.5rem;
+  margin-left: 1.5rem; */
+  /* width: 100%; */
   min-height: 100vh;
   background-color: var(--color-dark-grey);
 }
@@ -40,6 +43,7 @@ p {
 
 ul {
   padding: 0;
+  list-style: none;
 }
 
 li {

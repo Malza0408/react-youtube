@@ -1,13 +1,15 @@
 import React from 'react';
-import MetaData from '../video/metaData';
+import VideoCard from '../video/videoCard';
 import styles from './searchResult.module.css';
 
-const AfterSearch = ({
+const SearchResult = ({
   searchResult,
   generateKey,
   handleViewCount,
   selectVideo,
   handleDate,
+  videoCardSetting,
+  thumbSize,
 }) => {
   return (
     <>
@@ -20,12 +22,7 @@ const AfterSearch = ({
                 key={generateKey(video.snippet.publishedAt)}
                 onClick={() => selectVideo(video)}
               >
-                <img
-                  className={styles.thumbnails}
-                  src={video.snippet.thumbnails.medium.url}
-                  alt="video_thumbnail"
-                />
-                <MetaData
+                <VideoCard
                   snippet={video.snippet}
                   statistics={video.statistics}
                   handleViewCount={handleViewCount}
@@ -33,6 +30,8 @@ const AfterSearch = ({
                   display={'margin'}
                   description={'show'}
                   handleDate={handleDate}
+                  videoCardSetting={videoCardSetting}
+                  thumbSize={thumbSize}
                 />
               </li>
             ))}
@@ -43,4 +42,4 @@ const AfterSearch = ({
   );
 };
 
-export default AfterSearch;
+export default SearchResult;

@@ -1,0 +1,54 @@
+.home {
+  margin: 0;
+}
+
+.home .metaData {
+  width: 100%;
+}
+
+.searchResult {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.searchResult .thumbSizeMedium {
+  max-width: 320px;
+  max-height: 180px;
+  margin-right: 1rem;
+}
+
+.searchResult .metaData {
+  width: 100%;
+  min-width: 35%;
+}
+
+.playVideo {
+  display: flex;
+  align-items: flex-start;
+}
+
+.playVideo .metaData {
+  width: 100%;
+}
+
+.thumbSizeSmall {
+  width: 168px;
+  height: 94px;
+  margin-right: 0.4rem;
+}
+
+img {
+  cursor: pointer;
+  width: 100%;
+}
+
+.metaData:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .searchResult .thumbSizeMedium {
+    min-width: 240px;
+    min-height: 135px;
+  }
+}

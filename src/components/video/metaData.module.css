@@ -29,7 +29,12 @@
   margin-bottom: 0.8rem;
 }
 
+.haveNone {
+  margin: 0;
+}
+
 .description {
+  display: block;
   margin-top: 0.8rem;
   overflow: hidden;
   text-overflow: ellipsis;

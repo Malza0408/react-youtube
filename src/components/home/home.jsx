@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './home.module.css';
-import MetaData from '../video/metaData';
+import VideoCard from '../video/videoCard';
 
 const Home = ({
   videos,
@@ -8,6 +8,7 @@ const Home = ({
   handleViewCount,
   selectVideo,
   handleDate,
+  videoCardSetting,
 }) => {
   return (
     <>
@@ -19,17 +20,13 @@ const Home = ({
               key={generateKey(video.snippet.publishedAt)}
               onClick={() => selectVideo(video)}
             >
-              <img
-                className={styles.thumbnails}
-                src={video.snippet.thumbnails.medium.url}
-                alt="video_thumbnail"
-              />
-              <MetaData
+              <VideoCard
                 snippet={video.snippet}
                 statistics={video.statistics}
                 handleViewCount={handleViewCount}
                 fontSize={'regular'}
                 handleDate={handleDate}
+                videoCardSetting={videoCardSetting}
               />
             </li>
           ))}

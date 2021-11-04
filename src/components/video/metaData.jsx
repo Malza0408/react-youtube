@@ -11,27 +11,26 @@ const MetaData = ({
   handleDate,
 }) => {
   const font = fontSize === `regular` ? styles.regular : styles.small;
+  // searchResult 에서 metaData margin 여부
   const displayType =
     display === 'margin' ? styles.haveMargin : styles.haveNone;
   const showDescription = description === 'show' ? styles.show : styles.hidden;
 
   return (
     <>
-      <div className={styles.metaData}>
-        <p className={styles.title}>{snippet.title}</p>
-        <p className={`${styles.channelTitle} ${font} ${displayType}`}>
-          {snippet.channelTitle}
-        </p>
-        <p className={`${styles.viewCount} ${font}`}>
-          조회수 {handleViewCount(statistics.viewCount)}
-        </p>
-        <p className={`${styles.publishedDate} ${font}`}>
-          {handleDate(snippet.publishedAt)}
-        </p>
-        <span className={`${styles.description} ${showDescription}`}>
-          {snippet.description}
-        </span>
-      </div>
+      <p className={styles.title}>{snippet.title}</p>
+      <p className={`${styles.channelTitle} ${font} ${displayType}`}>
+        {snippet.channelTitle}
+      </p>
+      <p className={`${styles.viewCount} ${font}`}>
+        조회수 {handleViewCount(statistics.viewCount)}
+      </p>
+      <p className={`${styles.publishedDate} ${font}`}>
+        {handleDate(snippet.publishedAt)}
+      </p>
+      <span className={`${styles.description} ${showDescription}`}>
+        {snippet.description}
+      </span>
     </>
   );
 };

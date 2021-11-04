@@ -9,11 +9,22 @@ import SearchResult from './components/searchResult/searchResult';
 import PlayVideo from './components/playVideo/playVideo';
 import NotFound from './components/notFound';
 
+const videoCardSetting = Object.freeze({
+  home: 'home',
+  searchResult: 'searchResult',
+  playVideo: 'playVideo',
+});
+
+const thumbSize = Object.freeze({
+  small: 'small',
+  medium: 'medium',
+});
+
 function App() {
   const [videos, setVideos] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const maxResults = 12;
+  const maxResults = 15;
   const history = useHistory();
 
   useEffect(() => {
@@ -116,6 +127,8 @@ function App() {
               handleViewCount={handleViewCount}
               selectVideo={selectVideo}
               handleDate={handleDate}
+              videoCardSetting={videoCardSetting.home}
+              thumbSize={thumbSize.medium}
             />
           )}
         />
@@ -128,6 +141,8 @@ function App() {
               handleViewCount={handleViewCount}
               selectVideo={selectVideo}
               handleDate={handleDate}
+              videoCardSetting={videoCardSetting.searchResult}
+              thumbSize={thumbSize.medium}
             />
           )}
         />
@@ -141,6 +156,8 @@ function App() {
               selectVideo={selectVideo}
               handleViewCount={handleViewCount}
               handleDate={handleDate}
+              videoCardSetting={videoCardSetting.playVideo}
+              thumbSize={thumbSize.small}
             />
           )}
         />
