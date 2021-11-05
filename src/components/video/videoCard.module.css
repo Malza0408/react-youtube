@@ -42,6 +42,12 @@ img {
   width: 100%;
 }
 
+.home:hover img,
+.searchResult:hover img,
+.playVideo:hover img {
+  opacity: 0.8;
+}
+
 .metaData:hover {
   cursor: pointer;
 }

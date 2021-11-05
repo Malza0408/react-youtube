@@ -5,10 +5,11 @@ import VideoCard from '../video/videoCard';
 const Home = ({
   videos,
   generateKey,
-  handleViewCount,
+  handleCount,
   selectVideo,
   handleDate,
   videoCardSetting,
+  fontSize,
 }) => {
   return (
     <>
@@ -23,8 +24,8 @@ const Home = ({
               <VideoCard
                 snippet={video.snippet}
                 statistics={video.statistics}
-                handleViewCount={handleViewCount}
-                fontSize={'regular'}
+                handleCount={handleCount}
+                fontSize={fontSize}
                 handleDate={handleDate}
                 videoCardSetting={videoCardSetting}
               />

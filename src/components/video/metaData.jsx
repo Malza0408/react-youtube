@@ -4,7 +4,7 @@ import styles from './metaData.module.css';
 const MetaData = ({
   snippet,
   statistics,
-  handleViewCount,
+  handleCount,
   fontSize,
   display,
   description,
@@ -23,7 +23,7 @@ const MetaData = ({
         {snippet.channelTitle}
       </p>
       <p className={`${styles.viewCount} ${font}`}>
-        조회수 {handleViewCount(statistics.viewCount)}
+        조회수 {`${handleCount(statistics.viewCount)}회`}
       </p>
       <p className={`${styles.publishedDate} ${font}`}>
         {handleDate(snippet.publishedAt)}

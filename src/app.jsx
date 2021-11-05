@@ -20,6 +20,11 @@ const thumbSize = Object.freeze({
   medium: 'medium',
 });
 
+const setFontSize = Object.freeze({
+  regular: 'regular',
+  small: 'small',
+});
+
 function App() {
   const [videos, setVideos] = useState([]);
   const [searchList, setSearchList] = useState([]);
@@ -35,7 +40,7 @@ function App() {
       };
 
       await fetch(
-        `https://youtube.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&chart=mostPopular&maxResults=${maxResults}&fields=items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount), id)&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
+        `https://youtube.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&chart=mostPopular&maxResults=${maxResults}&fields=items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount), id)&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
         requestOptions,
       )
         .then(response => response.json())
@@ -68,7 +73,7 @@ function App() {
           };
 
           await fetch(
-            `https://youtube.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&fields=items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount),id)&id=${videoList}&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
+            `https://youtube.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&fields=items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount),id)&id=${videoList}&key=AIzaSyB6Ihib72gMqqO5Qz9L5DioTEc3Frnb3Lc`,
             requestOptions,
           )
             .then(response => response.json())
@@ -91,11 +96,13 @@ function App() {
     history.push('/playVideo');
   };
 
-  const handleViewCount = viewCount => {
-    if (viewCount < 10000) {
+  const handleCount = viewCount => {
+    if (viewCount < 1000) {
+      return `${viewCount}`;
+    } else if (viewCount < 10000) {
       viewCount /= 1000;
       viewCount = Math.floor(viewCount);
-      return `${viewCount}천회`;
+      return `${viewCount}천`;
     }
     viewCount /= 10000;
     viewCount = Math.floor(viewCount);
@@ -103,14 +110,19 @@ function App() {
     if (viewCount > 10000) {
       viewCount /= 10000;
       viewCount = Math.floor(viewCount);
-      return `${viewCount}억회`;
+      return `${viewCount}억`;
     }
-    return `${viewCount}만회`;
+    return `${viewCount}만`;
   };
 
   const handleDate = date => {
     const publishedDate = new Date(date);
     return `${publishedDate.getFullYear()}년 ${publishedDate.getMonth()}월 ${publishedDate.getDate()}일`;
+  };
+
+  const handleViewCountForm = count => {
+    const number = Number(count);
+    return number.toLocaleString('ko-kr');
   };
 
   return (
@@ -124,11 +136,12 @@ function App() {
             <Home
               videos={videos}
               generateKey={generateKey}
-              handleViewCount={handleViewCount}
+              handleCount={handleCount}
               selectVideo={selectVideo}
               handleDate={handleDate}
               videoCardSetting={videoCardSetting.home}
               thumbSize={thumbSize.medium}
+              fontSize={setFontSize.regular}
             />
           )}
         />
@@ -138,11 +151,12 @@ function App() {
             <SearchResult
               searchResult={searchList}
               generateKey={generateKey}
-              handleViewCount={handleViewCount}
+              handleCount={handleCount}
               selectVideo={selectVideo}
               handleDate={handleDate}
               videoCardSetting={videoCardSetting.searchResult}
               thumbSize={thumbSize.medium}
+              fontSize={setFontSize.small}
             />
           )}
         />
@@ -154,10 +168,12 @@ function App() {
               video={selectedVideo}
               generateKey={generateKey}
               selectVideo={selectVideo}
-              handleViewCount={handleViewCount}
+              handleCount={handleCount}
+              handleViewCountForm={handleViewCountForm}
               handleDate={handleDate}
               videoCardSetting={videoCardSetting.playVideo}
               thumbSize={thumbSize.small}
+              fontSize={setFontSize.small}
             />
           )}
         />

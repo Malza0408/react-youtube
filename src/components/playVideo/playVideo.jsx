@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useState } from 'react/cjs/react.development';
 import VideoCard from '../video/videoCard';
@@ -7,11 +8,13 @@ const PlayVideo = ({
   videos,
   video,
   generateKey,
-  handleViewCount,
+  handleCount,
+  handleViewCountForm,
   selectVideo,
   handleDate,
   videoCardSetting,
   thumbSize,
+  fontSize,
 }) => {
   const [toggle, setToggle] = useState('false');
 
@@ -20,11 +23,6 @@ const PlayVideo = ({
     event.target.innerText === '더보기'
       ? (event.target.innerText = '간략히')
       : (event.target.innerText = '더보기');
-  };
-
-  const handleViewCountForm = count => {
-    const number = Number(count);
-    return number.toLocaleString('ko-kr');
   };
 
   return (
@@ -39,12 +37,30 @@ const PlayVideo = ({
         ></iframe>
         <section className={styles.title_container}>
           <h2>{video.snippet.title}</h2>
-          <span className={styles.viewCount}>{`조회수 ${handleViewCountForm(
-            video.statistics.viewCount,
-          )}회`}</span>
-          <span className={styles.publishedAt}>
-            {handleDate(video.snippet.publishedAt)}
-          </span>
+          <section className={styles.title_metaData}>
+            <section className={styles.viewAndDate}>
+              <span className={styles.viewCount}>{`조회수 ${handleViewCountForm(
+                video.statistics.viewCount,
+              )}회`}</span>
+              <span className={styles.publishedAt}>
+                {handleDate(video.snippet.publishedAt)}
+              </span>
+            </section>
+            <section className={styles.icons}>
+              <FontAwesomeIcon
+                icon={['far', 'thumbs-up']}
+                color="white"
+                className={styles.thumb_icon}
+              />
+              <span>{handleCount(video.statistics.likeCount)}</span>
+              <FontAwesomeIcon
+                icon={['far', 'thumbs-down']}
+                color="white"
+                className={styles.thumb_icon}
+              />
+              <span>{handleCount(video.statistics.dislikeCount)}</span>
+            </section>
+          </section>
         </section>
         <section className={styles.description_container}>
           <p className={toggle ? styles.description : styles.show}>
@@ -54,6 +70,7 @@ const PlayVideo = ({
             더보기
           </button>
         </section>
+        <div className={styles.underline}></div>
       </div>
       <div className={styles.videoList}>
         <ul>
@@ -66,8 +83,8 @@ const PlayVideo = ({
               <VideoCard
                 snippet={video.snippet}
                 statistics={video.statistics}
-                handleViewCount={handleViewCount}
-                fontSize={'small'}
+                handleCount={handleCount}
+                fontSize={fontSize}
                 handleDate={handleDate}
                 videoCardSetting={videoCardSetting}
                 thumbSize={thumbSize}

@@ -5,7 +5,7 @@ import styles from './videoCard.module.css';
 const VideoCard = ({
   snippet,
   statistics,
-  handleViewCount,
+  handleCount,
   fontSize,
   display,
   description,
@@ -13,16 +13,16 @@ const VideoCard = ({
   videoCardSetting,
   thumbSize,
 }) => {
-  let thumbStyle;
+  let cardPos;
   switch (videoCardSetting) {
     case 'home':
-      thumbStyle = styles.home;
+      cardPos = styles.home;
       break;
     case 'searchResult':
-      thumbStyle = styles.searchResult;
+      cardPos = styles.searchResult;
       break;
     case 'playVideo':
-      thumbStyle = styles.playVideo;
+      cardPos = styles.playVideo;
       break;
     default:
       throw new Error('check videoCardSetting!');
@@ -34,7 +34,7 @@ const VideoCard = ({
       : styles.thumbSizeMedium;
   return (
     <>
-      <article className={`${thumbStyle}`}>
+      <article className={`${cardPos}`}>
         <img
           className={`${size}`}
           src={snippet.thumbnails.medium.url}
@@ -44,7 +44,7 @@ const VideoCard = ({
           <MetaData
             snippet={snippet}
             statistics={statistics}
-            handleViewCount={handleViewCount}
+            handleCount={handleCount}
             fontSize={fontSize}
             display={display}
             description={description}

@@ -5,11 +5,12 @@ import styles from './searchResult.module.css';
 const SearchResult = ({
   searchResult,
   generateKey,
-  handleViewCount,
+  handleCount,
   selectVideo,
   handleDate,
   videoCardSetting,
   thumbSize,
+  fontSize,
 }) => {
   return (
     <>
@@ -25,8 +26,8 @@ const SearchResult = ({
                 <VideoCard
                   snippet={video.snippet}
                   statistics={video.statistics}
-                  handleViewCount={handleViewCount}
-                  fontSize={'samll'}
+                  handleCount={handleCount}
+                  fontSize={fontSize}
                   display={'margin'}
                   description={'show'}
                   handleDate={handleDate}
