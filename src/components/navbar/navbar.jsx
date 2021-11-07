@@ -8,7 +8,6 @@ const Navbar = props => {
 
   const handleSubmit = event => {
     const q = inputRef.current.value;
-    console.log(q);
     q && props.search(q);
     event.preventDefault();
   };

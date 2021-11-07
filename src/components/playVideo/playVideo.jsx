@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { useState } from 'react/cjs/react.development';
 import VideoCard from '../video/videoCard';
 import styles from './playVideo.module.css';
@@ -17,13 +18,20 @@ const PlayVideo = ({
   fontSize,
 }) => {
   const [toggle, setToggle] = useState('false');
-
+  const history = useHistory();
   const toggleDescription = event => {
     setToggle(!toggle);
     event.target.innerText === '더보기'
       ? (event.target.innerText = '간략히')
       : (event.target.innerText = '더보기');
   };
+
+  useEffect(() => {
+    setToggle('false');
+    if (video.lenth === 0) {
+      history.push('/');
+    }
+  }, []);
 
   return (
     <section className={styles.playVideo}>
@@ -32,7 +40,7 @@ const PlayVideo = ({
           title="playVideo"
           id="ytplayer"
           type="text/html"
-          src={`https://www.youtube.com/embed/${video.id}`}
+          src={`https://www.youtube.com/embed/${video && video.id}`}
           allowFullScreen
         ></iframe>
         <section className={styles.title_container}>
@@ -46,19 +54,23 @@ const PlayVideo = ({
                 {handleDate(video.snippet.publishedAt)}
               </span>
             </section>
-            <section className={styles.icons}>
-              <FontAwesomeIcon
-                icon={['far', 'thumbs-up']}
-                color="white"
-                className={styles.thumb_icon}
-              />
-              <span>{handleCount(video.statistics.likeCount)}</span>
-              <FontAwesomeIcon
-                icon={['far', 'thumbs-down']}
-                color="white"
-                className={styles.thumb_icon}
-              />
-              <span>{handleCount(video.statistics.dislikeCount)}</span>
+            <section className={styles.icons_container}>
+              <div className={styles.icons}>
+                <FontAwesomeIcon
+                  icon={['far', 'thumbs-up']}
+                  color="white"
+                  className={styles.thumb_icon}
+                />
+                <span>{handleCount(video.statistics.likeCount)}</span>
+              </div>
+              <div className={styles.icons}>
+                <FontAwesomeIcon
+                  icon={['far', 'thumbs-down']}
+                  color="white"
+                  className={styles.thumb_icon}
+                />
+                <span>{handleCount(video.statistics.dislikeCount)}</span>
+              </div>
             </section>
           </section>
         </section>

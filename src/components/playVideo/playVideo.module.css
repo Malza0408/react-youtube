@@ -48,8 +48,16 @@
   margin-right: 0.3rem;
 }
 
-.icons span {
+.icons_container {
+  display: flex;
+}
+
+.icons {
   margin-right: 1.5rem;
+}
+
+.icons:hover {
+  cursor: pointer;
 }
 
 .viewCount {
@@ -74,10 +82,12 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   margin-bottom: 1rem;
+  line-height: 1.5rem;
 }
 
 .show {
   margin-bottom: 1rem;
+  line-height: 1.5rem;
 }
 
 .showMore {
