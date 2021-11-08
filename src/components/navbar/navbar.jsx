@@ -10,7 +10,6 @@ const Navbar = memo(props => {
     q && props.search(q);
     event.preventDefault();
   };
-  console.log('navbar');
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo} onClick={props.goHome}>
@@ -28,7 +27,13 @@ const Navbar = memo(props => {
           placeholder="검색"
           ref={inputRef}
         />
-        <button className={styles.inputBtn}></button>
+        <button className={styles.inputBtn}>
+          <FontAwesomeIcon
+            icon={['fa', 'search']}
+            color="white"
+            className={styles.font_search}
+          />
+        </button>
       </form>
       <div className={styles.logIn}>
         <FontAwesomeIcon

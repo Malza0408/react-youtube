@@ -44,8 +44,8 @@
 }
 
 .haveMargin {
-  margin-top: 0.8rem;
-  margin-bottom: 0.8rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
 }
 
 .haveNone {
@@ -61,6 +61,7 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   color: var(--color-dark-white);
+  font-size: var(--font-size-small);
 }
 
 .show {

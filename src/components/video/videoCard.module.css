@@ -15,11 +15,13 @@
   max-width: 320px;
   max-height: 180px;
   margin-right: 1rem;
+  height: 100%;
 }
 
 .searchResult .metaData {
   width: 100%;
   min-width: 35%;
+  height: 100%;
 }
 
 .playVideo {
@@ -50,11 +52,4 @@ img {
 
 .metaData:hover {
   cursor: pointer;
-}
-
-@media (max-width: 900px) {
-  .searchResult .thumbSizeMedium {
-    min-width: 240px;
-    min-height: 135px;
-  }
 }

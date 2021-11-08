@@ -29,7 +29,7 @@ function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const maxResults = 10;
+  const maxResults = 24;
   const history = useHistory();
   useEffect(() => {
     youtube
