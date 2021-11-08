@@ -1,7 +1,6 @@
 import './app.css';
 import { useHistory, Route, Switch } from 'react-router-dom';
-import { useState } from 'react/cjs/react.development';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Navbar from './components/navbar/navbar';
 import Home from './components/home/home';
 import SearchResult from './components/searchResult/searchResult';
