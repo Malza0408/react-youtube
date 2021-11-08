@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router';
 import { useState } from 'react/cjs/react.development';
 import VideoCard from '../video/videoCard';
 import styles from './playVideo.module.css';
@@ -18,7 +17,6 @@ const PlayVideo = ({
   fontSize,
 }) => {
   const [toggle, setToggle] = useState('false');
-  const history = useHistory();
   const toggleDescription = event => {
     setToggle(!toggle);
     event.target.innerText === '더보기'
@@ -28,9 +26,6 @@ const PlayVideo = ({
 
   useEffect(() => {
     setToggle('false');
-    if (video.lenth === 0) {
-      history.push('/');
-    }
   }, []);
 
   return (

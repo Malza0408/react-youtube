@@ -1,9 +1,8 @@
-import React, { createRef } from 'react';
+import React, { createRef, memo } from 'react';
 import styles from './navbar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { withRouter } from 'react-router';
 
-const Navbar = props => {
+const Navbar = memo(props => {
   const inputRef = createRef();
 
   const handleSubmit = event => {
@@ -11,10 +10,10 @@ const Navbar = props => {
     q && props.search(q);
     event.preventDefault();
   };
-
+  console.log('navbar');
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logo} onClick={() => props.history.push('/')}>
+      <div className={styles.logo} onClick={props.goHome}>
         <FontAwesomeIcon
           icon={['fab', 'youtube']}
           color="red"
@@ -41,6 +40,6 @@ const Navbar = props => {
       </div>
     </nav>
   );
-};
+});
 
-export default withRouter(Navbar);
+export default Navbar;

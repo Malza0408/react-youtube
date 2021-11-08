@@ -1,7 +1,7 @@
 import './app.css';
 import { useHistory, Route, Switch } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Navbar from './components/navbar/navbar';
 import Home from './components/home/home';
 import SearchResult from './components/searchResult/searchResult';
@@ -31,33 +31,37 @@ function App({ youtube }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const maxResults = 15;
   const history = useHistory();
-
   useEffect(() => {
     youtube
       .mostPopular(maxResults) //
       .then(videos => setVideos(videos));
-  }, []);
+  }, [youtube]);
 
   // 검색하고 결과를 받는데, 결과의 id 들을 받아온다.
-  const search = query => {
-    youtube
-      .searchID(maxResults, query) //
-      .then(result => {
-        youtube
-          .searchVideos(maxResults, result) //
-          .then(videos => setSearchList(videos))
-          .then(history.push('/searchResult'));
-      });
-  };
+  const search = useCallback(
+    query => {
+      youtube
+        .searchID(maxResults, query) //
+        .then(result => {
+          youtube
+            .searchVideos(maxResults, result) //
+            .then(videos => setSearchList(videos))
+            .then(history.push('/searchResult'));
+        });
+    },
+    [history, youtube],
+  );
 
   const selectVideo = video => {
     setSelectedVideo(video);
     history.push('/playVideo');
   };
 
+  const goHome = useCallback(() => history.push('./'), [history]);
+
   return (
     <>
-      <Navbar search={search} />
+      <Navbar search={search} goHome={goHome} />
       <Switch>
         <Route
           path="/"
