@@ -60,63 +60,53 @@ function App({ youtube }) {
     history.push('/playVideo');
   };
 
-  const goHome = useCallback(() => history.push('./'), [history]);
+  const goHome = useCallback(() => history.push('/'), [history]);
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <>
       <Navbar search={search} goHome={goHome} />
       <Switch>
-        <Route
-          path="/"
-          exact
-          render={() => (
-            <Home
-              videos={videos}
-              generateKey={functions.generateKey}
-              handleCount={functions.handleCount}
-              selectVideo={selectVideo}
-              handleDate={functions.handleDate}
-              videoCardSetting={videoCardSetting.home}
-              thumbSize={thumbSize.medium}
-              fontSize={setFontSize.small}
-            />
-          )}
-        />
-        <Route
-          path="/searchResult"
-          render={() => (
-            <SearchResult
-              searchResult={searchList}
-              generateKey={functions.generateKey}
-              handleCount={functions.handleCount}
-              selectVideo={selectVideo}
-              handleDate={functions.handleDate}
-              videoCardSetting={videoCardSetting.searchResult}
-              thumbSize={thumbSize.medium}
-              fontSize={setFontSize.small}
-            />
-          )}
-        />
-        <Route
-          path="/playVideo"
-          render={() => (
-            <PlayVideo
-              videos={searchList.length > 0 ? searchList : videos}
-              video={selectedVideo}
-              generateKey={functions.generateKey}
-              selectVideo={selectVideo}
-              handleCount={functions.handleCount}
-              handleViewCountForm={functions.handleViewCountForm}
-              handleDate={functions.handleDate}
-              videoCardSetting={videoCardSetting.playVideo}
-              thumbSize={thumbSize.small}
-              fontSize={setFontSize.small}
-            />
-          )}
-        />
+        <Route exact path="/">
+          <Home
+            videos={videos}
+            generateKey={functions.generateKey}
+            handleCount={functions.handleCount}
+            selectVideo={selectVideo}
+            handleDate={functions.handleDate}
+            videoCardSetting={videoCardSetting.home}
+            thumbSize={thumbSize.medium}
+            fontSize={setFontSize.small}
+          />
+        </Route>
+        <Route path="/searchResult">
+          <SearchResult
+            searchResult={searchList}
+            generateKey={functions.generateKey}
+            handleCount={functions.handleCount}
+            selectVideo={selectVideo}
+            handleDate={functions.handleDate}
+            videoCardSetting={videoCardSetting.searchResult}
+            thumbSize={thumbSize.medium}
+            fontSize={setFontSize.small}
+          />
+        </Route>
+        <Route path="/playVideo">
+          <PlayVideo
+            videos={searchList.length > 0 ? searchList : videos}
+            video={selectedVideo}
+            generateKey={functions.generateKey}
+            selectVideo={selectVideo}
+            handleCount={functions.handleCount}
+            handleViewCountForm={functions.handleViewCountForm}
+            handleDate={functions.handleDate}
+            videoCardSetting={videoCardSetting.playVideo}
+            thumbSize={thumbSize.small}
+            fontSize={setFontSize.small}
+          />
+        </Route>
         <Route component={NotFound}></Route>
       </Switch>
-    </BrowserRouter>
+    </>
   );
 }
 
