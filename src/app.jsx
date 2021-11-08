@@ -46,7 +46,6 @@ function App({ youtube }) {
             .searchVideos(result) //
             .then(videos => {
               setSearchList(videos);
-              console.log(videos.length);
             })
             .then(history.push('/searchResult'));
         });

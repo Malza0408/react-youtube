@@ -9,19 +9,22 @@
 .searchResult {
   display: flex;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .searchResult .thumbSizeMedium {
   max-width: 320px;
   max-height: 180px;
   margin-right: 1rem;
-  height: 100%;
+  flex-shrink: 0;
+  /* height: 100%; */
 }
 
 .searchResult .metaData {
   width: 100%;
   min-width: 35%;
   height: 100%;
+  /* background-color: red; */
 }
 
 .playVideo {
@@ -52,4 +55,14 @@ img {
 
 .metaData:hover {
   cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .searchResult .metaData {
+    background-color: red;
+  }
+  .searchResult .thumbSizeMedium {
+    width: calc(100% * 0.5);
+    height: calc((100% * 0.5) * 9 / 16);
+  }
 }
