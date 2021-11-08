@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './app';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/js/all.js';
 import Youtube from './service/youtube';
 import axios from 'axios';
@@ -15,9 +15,7 @@ const youtube = new Youtube(httpClient);
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="/react-youtube">
-      <App youtube={youtube} />
-    </BrowserRouter>
+    <App youtube={youtube} />
   </React.StrictMode>,
   document.getElementById('root'),
 );

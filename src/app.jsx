@@ -1,5 +1,5 @@
 import './app.css';
-import { useHistory, Route, Switch } from 'react-router-dom';
+import { useHistory, Route, Switch, BrowserRouter } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 import { useCallback, useEffect } from 'react';
 import Navbar from './components/navbar/navbar';
@@ -63,7 +63,7 @@ function App({ youtube }) {
   const goHome = useCallback(() => history.push('./'), [history]);
 
   return (
-    <>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Navbar search={search} goHome={goHome} />
       <Switch>
         <Route
@@ -116,7 +116,7 @@ function App({ youtube }) {
         />
         <Route component={NotFound}></Route>
       </Switch>
-    </>
+    </BrowserRouter>
   );
 }
 
