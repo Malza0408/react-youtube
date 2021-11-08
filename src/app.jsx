@@ -29,7 +29,7 @@ function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const maxResults = 15;
+  const maxResults = 10;
   const history = useHistory();
   useEffect(() => {
     youtube
@@ -44,8 +44,11 @@ function App({ youtube }) {
         .searchID(maxResults, query) //
         .then(result => {
           youtube
-            .searchVideos(maxResults, result) //
-            .then(videos => setSearchList(videos))
+            .searchVideos(result) //
+            .then(videos => {
+              setSearchList(videos);
+              console.log(videos.length);
+            })
             .then(history.push('/searchResult'));
         });
     },
