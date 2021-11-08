@@ -1,5 +1,5 @@
 import './app.css';
-import { useHistory, Route, Switch, BrowserRouter } from 'react-router-dom';
+import { useHistory, Route, Switch } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 import { useCallback, useEffect } from 'react';
 import Navbar from './components/navbar/navbar';
