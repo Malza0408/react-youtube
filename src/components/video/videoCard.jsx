@@ -49,6 +49,7 @@ const VideoCard = ({
             display={display}
             description={description}
             handleDate={handleDate}
+            metaSetting={videoCardSetting}
           />
         </div>
       </article>

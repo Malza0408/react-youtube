@@ -9,7 +9,22 @@ const MetaData = ({
   display,
   description,
   handleDate,
+  metaSetting,
 }) => {
+  let metaPos;
+  switch (metaSetting) {
+    case 'home':
+      metaPos = styles.home;
+      break;
+    case 'searchResult':
+      metaPos = styles.searchResult;
+      break;
+    case 'playVideo':
+      metaPos = styles.playVideo;
+      break;
+    default:
+      throw new Error('check videoCardSetting!');
+  }
   const font = fontSize === `regular` ? styles.regular : styles.small;
   // searchResult 에서 metaData margin 여부
   const displayType =
@@ -18,7 +33,7 @@ const MetaData = ({
 
   return (
     <>
-      <p className={styles.title}>{snippet.title}</p>
+      <p className={`${metaPos} ${styles.title}`}>{snippet.title}</p>
       <p className={`${styles.channelTitle} ${font} ${displayType}`}>
         {snippet.channelTitle}
       </p>
@@ -28,9 +43,9 @@ const MetaData = ({
       <p className={`${styles.publishedDate} ${font}`}>
         {handleDate(snippet.publishedAt)}
       </p>
-      <span className={`${styles.description} ${showDescription}`}>
+      <pre className={`${styles.description} ${showDescription}`}>
         {snippet.description}
-      </span>
+      </pre>
     </>
   );
 };

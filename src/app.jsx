@@ -45,9 +45,9 @@ function App({ youtube }) {
       .then(result => {
         youtube
           .searchVideos(maxResults, result) //
-          .then(videos => setSearchList(videos));
+          .then(videos => setSearchList(videos))
+          .then(history.push('/searchResult'));
       });
-    history.push('/searchResult');
   };
 
   const selectVideo = video => {
@@ -71,7 +71,7 @@ function App({ youtube }) {
               handleDate={functions.handleDate}
               videoCardSetting={videoCardSetting.home}
               thumbSize={thumbSize.medium}
-              fontSize={setFontSize.regular}
+              fontSize={setFontSize.small}
             />
           )}
         />

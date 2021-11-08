@@ -75,9 +75,9 @@ const PlayVideo = ({
           </section>
         </section>
         <section className={styles.description_container}>
-          <p className={toggle ? styles.description : styles.show}>
+          <pre className={toggle ? styles.description : styles.show}>
             {video.snippet.description}
-          </p>
+          </pre>
           <button className={styles.showMore} onClick={toggleDescription}>
             더보기
           </button>

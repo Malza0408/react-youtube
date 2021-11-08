@@ -9,6 +9,8 @@
 
 .logo {
   margin: 0.6rem 0.8rem;
+  display: flex;
+  align-items: center;
 }
 
 .logo:hover {
@@ -64,4 +66,10 @@
 .font_login {
   font-size: 120%;
   margin-right: 0.4rem;
+}
+
+@media (max-width: 640px) {
+  .logIn {
+    margin: 0;
+  }
 }
