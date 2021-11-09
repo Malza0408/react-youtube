@@ -17,14 +17,12 @@
   max-height: 180px;
   margin-right: 1rem;
   flex-shrink: 0;
-  /* height: 100%; */
 }
 
 .searchResult .metaData {
   width: 100%;
   min-width: 35%;
   height: 100%;
-  /* background-color: red; */
 }
 
 .playVideo {
@@ -58,9 +56,6 @@ img {
 }
 
 @media (max-width: 720px) {
-  .searchResult .metaData {
-    background-color: red;
-  }
   .searchResult .thumbSizeMedium {
     width: calc(100% * 0.5);
     height: calc((100% * 0.5) * 9 / 16);
