@@ -1,13 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { renderHook } from '@testing-library/react-hooks';
 import Youtube from './service/youtube';
 import '@fortawesome/fontawesome-free/js/all.js';
 import App from './app';
 import { mount } from 'enzyme';
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 
 const httpClient = axios.create({
   baseURL: 'https://youtube.googleapis.com/youtube/v3',
@@ -59,15 +55,6 @@ const setup = () => {
 
 describe('App', () => {
   it('should render App main page', () => {
-    setup();
-  });
-});
-
-describe('youtube mostpopular fetch', () => {
-  // const mostMock = jest.spyOn(youtube, 'mostPopular');
-  // mostMock.mockImplementation(() => mockMostPopular);
-
-  it('return mostpopular correctly', () => {
     setup();
   });
 });

@@ -12,7 +12,6 @@ const SearchResult = ({
   thumbSize,
   fontSize,
 }) => {
-  console.log(searchResult);
   return (
     <>
       <section className={styles.searchResult}>

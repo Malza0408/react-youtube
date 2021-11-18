@@ -26,7 +26,7 @@ const PlayVideo = ({
   useEffect(() => {
     setToggle('false');
   }, []);
-
+  console.log(video);
   return (
     <section className={styles.playVideo}>
       <div className={styles.container}>

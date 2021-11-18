@@ -1,5 +1,6 @@
 import { mount } from 'enzyme';
-import SearchResult from '../searchResult';
+import PlayVideo from '../playVideo';
+import '@fortawesome/fontawesome-free/js/all.js';
 
 const dummySearch = [
   {
@@ -30,17 +31,20 @@ generateKey.mockReturnValue(Math.random());
 const handleCount = jest.fn();
 const selectVideo = jest.fn();
 const handleDate = jest.fn();
+const handleViewCountForm = jest.fn();
 const videoCardSetting = 'searchResult';
 const thumbSize = 'medium';
 const fontSize = 'small';
 
 const setup = () => {
   return mount(
-    <SearchResult
-      searchResult={dummySearch}
+    <PlayVideo
+      videos={dummySearch}
+      video={dummySearch[0]}
       generateKey={generateKey}
-      handleCount={handleCount}
       selectVideo={selectVideo}
+      handleCount={handleCount}
+      handleViewCountForm={handleViewCountForm}
       handleDate={handleDate}
       videoCardSetting={videoCardSetting}
       thumbSize={thumbSize}
@@ -49,15 +53,11 @@ const setup = () => {
   );
 };
 
-describe('searchResult', () => {
-  it('searchResult rendering', () => {
-    setup();
-  });
-
-  it('비디오를 하나 선택하면 props중 하나인 selectVideo 가 동작한다.', () => {
+describe('playVideo', () => {
+  it('playVideo rendering', () => {
     const view = setup();
+    console.log(view.debug());
     const list = view.find('.videoCard');
-    // console.log(view.debug());
     list.simulate('click');
     expect(selectVideo).toBeCalledTimes(1);
   });
