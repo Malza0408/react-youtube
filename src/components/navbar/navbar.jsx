@@ -12,7 +12,7 @@ const Navbar = memo(props => {
   };
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logo} onClick={props.goHome}>
+      <div className={styles.logo} onClick={props.goHome} data-testid="logo">
         <FontAwesomeIcon
           icon={['fab', 'youtube']}
           color="red"
