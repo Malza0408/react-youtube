@@ -1,4 +1,5 @@
 import { mount } from 'enzyme';
+import videoCardContext from '../../../contexts/videoCardContext';
 import SearchResult from '../searchResult';
 
 const dummySearch = [
@@ -25,27 +26,39 @@ const dummySearch = [
   },
 ];
 
+const setting = Object.freeze({
+  page: {
+    home: 'home',
+    searchResult: 'searchResult',
+    playVideo: 'playVideo',
+  },
+  thumbSize: {
+    small: 'small',
+    medium: 'medium',
+  },
+  fontSize: {
+    regular: 'regular',
+    small: 'small',
+  },
+  display: {
+    margin: 'margin',
+    none: 'none',
+  },
+  description: {
+    show: 'show',
+    none: 'none',
+  },
+});
+
 const generateKey = jest.fn();
 generateKey.mockReturnValue(Math.random());
-const handleCount = jest.fn();
 const selectVideo = jest.fn();
-const handleDate = jest.fn();
-const videoCardSetting = 'searchResult';
-const thumbSize = 'medium';
-const fontSize = 'small';
 
 const setup = () => {
   return mount(
-    <SearchResult
-      searchResult={dummySearch}
-      generateKey={generateKey}
-      handleCount={handleCount}
-      selectVideo={selectVideo}
-      handleDate={handleDate}
-      videoCardSetting={videoCardSetting}
-      thumbSize={thumbSize}
-      fontSize={fontSize}
-    />,
+    <videoCardContext.Provider value={setting}>
+      <SearchResult searchResult={dummySearch} selectVideo={selectVideo} />
+    </videoCardContext.Provider>,
   );
 };
 

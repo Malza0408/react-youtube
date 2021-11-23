@@ -1,6 +1,7 @@
 import { mount } from 'enzyme';
 import PlayVideo from '../playVideo';
 import '@fortawesome/fontawesome-free/js/all.js';
+import videoCardContext from '../../../contexts/videoCardContext';
 
 const dummySearch = [
   {
@@ -28,35 +29,48 @@ const dummySearch = [
 
 const generateKey = jest.fn();
 generateKey.mockReturnValue(Math.random());
-const handleCount = jest.fn();
 const selectVideo = jest.fn();
-const handleDate = jest.fn();
-const handleViewCountForm = jest.fn();
-const videoCardSetting = 'searchResult';
-const thumbSize = 'medium';
-const fontSize = 'small';
+window.scrollTo = jest.fn();
+
+const setting = Object.freeze({
+  page: {
+    home: 'home',
+    searchResult: 'searchResult',
+    playVideo: 'playVideo',
+  },
+  thumbSize: {
+    small: 'small',
+    medium: 'medium',
+  },
+  fontSize: {
+    regular: 'regular',
+    small: 'small',
+  },
+  display: {
+    margin: 'margin',
+    none: 'none',
+  },
+  description: {
+    show: 'show',
+    none: 'none',
+  },
+});
 
 const setup = () => {
   return mount(
-    <PlayVideo
-      videos={dummySearch}
-      video={dummySearch[0]}
-      generateKey={generateKey}
-      selectVideo={selectVideo}
-      handleCount={handleCount}
-      handleViewCountForm={handleViewCountForm}
-      handleDate={handleDate}
-      videoCardSetting={videoCardSetting}
-      thumbSize={thumbSize}
-      fontSize={fontSize}
-    />,
+    <videoCardContext.Provider value={setting}>
+      <PlayVideo
+        videos={dummySearch}
+        video={dummySearch[0]}
+        selectVideo={selectVideo}
+      />
+    </videoCardContext.Provider>,
   );
 };
 
 describe('playVideo', () => {
   it('playVideo rendering', () => {
     const view = setup();
-    console.log(view.debug());
     const list = view.find('.videoCard');
     list.simulate('click');
     expect(selectVideo).toBeCalledTimes(1);

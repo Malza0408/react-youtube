@@ -1,4 +1,5 @@
 import { mount } from 'enzyme';
+import videoCardContext from '../../../contexts/videoCardContext';
 import Home from '../home';
 
 const dummyVideo = [
@@ -35,27 +36,39 @@ const dummyVideo = [
   },
 ];
 
-const handleCount = jest.fn();
 const selectVideo = jest.fn();
-const handleDate = jest.fn();
-const videoCardSetting = 'home';
 const generateKey = jest.fn();
 generateKey.mockReturnValue(Math.random());
-const thumbSize = 'small';
-const fontSize = 'small';
+
+const setting = Object.freeze({
+  page: {
+    home: 'home',
+    searchResult: 'searchResult',
+    playVideo: 'playVideo',
+  },
+  thumbSize: {
+    small: 'small',
+    medium: 'medium',
+  },
+  fontSize: {
+    regular: 'regular',
+    small: 'small',
+  },
+  display: {
+    margin: 'margin',
+    none: 'none',
+  },
+  description: {
+    show: 'show',
+    none: 'none',
+  },
+});
 
 function setup() {
   return mount(
-    <Home
-      videos={dummyVideo}
-      generateKey={generateKey}
-      handleCount={handleCount}
-      selectVideo={selectVideo}
-      handleDate={handleDate}
-      videoCardSetting={videoCardSetting}
-      thumbSize={thumbSize}
-      fontSize={fontSize}
-    />,
+    <videoCardContext.Provider value={setting}>
+      <Home videos={dummyVideo} selectVideo={selectVideo} />
+    </videoCardContext.Provider>,
   );
 }
 
