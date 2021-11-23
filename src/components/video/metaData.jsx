@@ -1,17 +1,9 @@
 import React, { memo } from 'react';
 import styles from './metaData.module.css';
+import { handleCount, handleDate } from '../function/functionBundle.js';
 
 const MetaData = memo(
-  ({
-    snippet,
-    statistics,
-    handleCount,
-    fontSize,
-    display,
-    description,
-    handleDate,
-    metaSetting,
-  }) => {
+  ({ snippet, statistics, fontSize, display, description, metaSetting }) => {
     let metaPos;
     switch (metaSetting) {
       case 'home':
@@ -26,6 +18,7 @@ const MetaData = memo(
       default:
         throw new Error('check videoCardSetting!');
     }
+
     const font = fontSize === `regular` ? styles.regular : styles.small;
     // searchResult 에서 metaData margin 여부
     const displayType =

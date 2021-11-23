@@ -1,17 +1,12 @@
 import React from 'react';
 import VideoCard from '../video/videoCard';
 import styles from './searchResult.module.css';
+import { generateKey } from '../function/functionBundle';
+import { useContext } from 'react';
+import videoCardContext from '../../contexts/videoCardContext';
 
-const SearchResult = ({
-  searchResult,
-  generateKey,
-  handleCount,
-  selectVideo,
-  handleDate,
-  videoCardSetting,
-  thumbSize,
-  fontSize,
-}) => {
+const SearchResult = ({ searchResult, selectVideo }) => {
+  const setting = useContext(videoCardContext);
   return (
     <>
       <section className={styles.searchResult}>
@@ -26,13 +21,11 @@ const SearchResult = ({
                 <VideoCard
                   snippet={video.snippet}
                   statistics={video.statistics}
-                  handleCount={handleCount}
-                  fontSize={fontSize}
-                  display={'margin'}
-                  description={'show'}
-                  handleDate={handleDate}
-                  videoCardSetting={videoCardSetting}
-                  thumbSize={thumbSize}
+                  fontSize={setting.fontSize.small}
+                  display={setting.display.margin}
+                  description={setting.description.show}
+                  videoCardSetting={setting.page.searchResult}
+                  thumbSize={setting.thumbSize.medium}
                 />
               </li>
             ))}

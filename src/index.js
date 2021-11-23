@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/js/all.js';
 import Youtube from './service/youtube';
 import axios from 'axios';
+import videoCardContext from './contexts/videoCardContext';
 
 const httpClient = axios.create({
   baseURL: 'https://youtube.googleapis.com/youtube/v3',
@@ -13,10 +14,36 @@ const httpClient = axios.create({
 });
 const youtube = new Youtube(httpClient);
 
+const setting = Object.freeze({
+  page: {
+    home: 'home',
+    searchResult: 'searchResult',
+    playVideo: 'playVideo',
+  },
+  thumbSize: {
+    small: 'small',
+    medium: 'medium',
+  },
+  fontSize: {
+    regular: 'regular',
+    small: 'small',
+  },
+  display: {
+    margin: 'margin',
+    none: 'none',
+  },
+  description: {
+    show: 'show',
+    none: 'none',
+  },
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <App youtube={youtube} />
+      <videoCardContext.Provider value={setting}>
+        <App youtube={youtube} />
+      </videoCardContext.Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),

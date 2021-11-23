@@ -2,19 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import VideoCard from '../video/videoCard';
 import styles from './playVideo.module.css';
+import * as functions from '../function/functionBundle';
+import { useContext } from 'react';
+import videoCardContext from '../../contexts/videoCardContext';
 
-const PlayVideo = ({
-  videos,
-  video,
-  generateKey,
-  handleCount,
-  handleViewCountForm,
-  selectVideo,
-  handleDate,
-  videoCardSetting,
-  thumbSize,
-  fontSize,
-}) => {
+const PlayVideo = ({ videos, video, selectVideo }) => {
   const [toggle, setToggle] = useState('false');
   const toggleDescription = event => {
     setToggle(!toggle);
@@ -26,80 +18,91 @@ const PlayVideo = ({
   useEffect(() => {
     setToggle('false');
   }, []);
-  console.log(video);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
+  const setting = useContext(videoCardContext);
   return (
-    <section className={styles.playVideo}>
-      <div className={styles.container}>
-        <iframe
-          title="playVideo"
-          id="ytplayer"
-          type="text/html"
-          src={`https://www.youtube.com/embed/${video && video.id}`}
-          allowFullScreen
-        ></iframe>
-        <section className={styles.title_container}>
-          <h2>{video.snippet.title}</h2>
-          <section className={styles.title_metaData}>
-            <section className={styles.viewAndDate}>
-              <span className={styles.viewCount}>{`조회수 ${handleViewCountForm(
-                video.statistics.viewCount,
-              )}회`}</span>
-              <span className={styles.publishedAt}>
-                {handleDate(video.snippet.publishedAt)}
-              </span>
-            </section>
-            <section className={styles.icons_container}>
-              <div className={styles.icons}>
-                <FontAwesomeIcon
-                  icon={['far', 'thumbs-up']}
-                  color="white"
-                  className={styles.thumb_icon}
-                />
-                <span>{handleCount(video.statistics.likeCount)}</span>
-              </div>
-              <div className={styles.icons}>
-                <FontAwesomeIcon
-                  icon={['far', 'thumbs-down']}
-                  color="white"
-                  className={styles.thumb_icon}
-                />
-                <span>{handleCount(video.statistics.dislikeCount)}</span>
-              </div>
+    video && (
+      <section className={styles.playVideo}>
+        <div className={styles.container}>
+          <iframe
+            title="playVideo"
+            id="ytplayer"
+            type="text/html"
+            src={`https://www.youtube.com/embed/${video && video.id}`}
+            allowFullScreen
+          ></iframe>
+          <section className={styles.title_container}>
+            <h2>{video.snippet.title}</h2>
+            <section className={styles.title_metaData}>
+              <section className={styles.viewAndDate}>
+                <span
+                  className={styles.viewCount}
+                >{`조회수 ${functions.handleViewCountForm(
+                  video.statistics.viewCount,
+                )}회`}</span>
+                <span className={styles.publishedAt}>
+                  {functions.handleDate(video.snippet.publishedAt)}
+                </span>
+              </section>
+              <section className={styles.icons_container}>
+                <div className={styles.icons}>
+                  <FontAwesomeIcon
+                    icon={['far', 'thumbs-up']}
+                    color="white"
+                    className={styles.thumb_icon}
+                  />
+                  <span>
+                    {functions.handleCount(video.statistics.likeCount)}
+                  </span>
+                </div>
+                <div className={styles.icons}>
+                  <FontAwesomeIcon
+                    icon={['far', 'thumbs-down']}
+                    color="white"
+                    className={styles.thumb_icon}
+                  />
+                  <span>
+                    {functions.handleCount(video.statistics.dislikeCount)}
+                  </span>
+                </div>
+              </section>
             </section>
           </section>
-        </section>
-        <section className={styles.description_container}>
-          <pre className={toggle ? styles.description : styles.show}>
-            {video.snippet.description}
-          </pre>
-          <button className={styles.showMore} onClick={toggleDescription}>
-            더보기
-          </button>
-        </section>
-        <div className={styles.underline}></div>
-      </div>
-      <div className={styles.videoList}>
-        <ul>
-          {videos.map(video => (
-            <li
-              className={styles.videoCard}
-              key={generateKey(video.snippet.publishedAt)}
-              onClick={() => selectVideo(video)}
-            >
-              <VideoCard
-                snippet={video.snippet}
-                statistics={video.statistics}
-                handleCount={handleCount}
-                fontSize={fontSize}
-                handleDate={handleDate}
-                videoCardSetting={videoCardSetting}
-                thumbSize={thumbSize}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+          <section className={styles.description_container}>
+            <pre className={toggle ? styles.description : styles.show}>
+              {video.snippet.description}
+            </pre>
+            <button className={styles.showMore} onClick={toggleDescription}>
+              더보기
+            </button>
+          </section>
+          <div className={styles.underline}></div>
+        </div>
+        <div className={styles.videoList}>
+          <ul>
+            {videos.map(video => (
+              <li
+                className={styles.videoCard}
+                key={functions.generateKey(video.snippet.publishedAt)}
+                onClick={() => selectVideo(video)}
+              >
+                <VideoCard
+                  snippet={video.snippet}
+                  statistics={video.statistics}
+                  fontSize={setting.fontSize.small}
+                  videoCardSetting={setting.page.playVideo}
+                  thumbSize={setting.thumbSize.small}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
   );
 };
 

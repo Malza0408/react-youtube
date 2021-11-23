@@ -6,11 +6,9 @@ const VideoCard = memo(
   ({
     snippet,
     statistics,
-    handleCount,
     fontSize,
     display,
     description,
-    handleDate,
     videoCardSetting,
     thumbSize,
   }) => {
@@ -45,11 +43,9 @@ const VideoCard = memo(
             <MetaData
               snippet={snippet}
               statistics={statistics}
-              handleCount={handleCount}
               fontSize={fontSize}
               display={display}
               description={description}
-              handleDate={handleDate}
               metaSetting={videoCardSetting}
             />
           </div>
