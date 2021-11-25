@@ -1,9 +1,9 @@
-import React, { createRef, memo } from 'react';
+import React, { useRef, memo } from 'react';
 import styles from './navbar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Navbar = memo(props => {
-  const inputRef = createRef();
+  const inputRef = useRef();
 
   const handleSubmit = event => {
     const q = inputRef.current.value;

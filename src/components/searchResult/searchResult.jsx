@@ -4,8 +4,9 @@ import styles from './searchResult.module.css';
 import { generateKey } from '../function/functionBundle';
 import { useContext } from 'react';
 import videoCardContext from '../../contexts/videoCardContext';
+import { memo } from 'react';
 
-const SearchResult = ({ searchResult, selectVideo }) => {
+const SearchResult = memo(({ searchResult, selectVideo }) => {
   const setting = useContext(videoCardContext);
   return (
     <>
@@ -34,6 +35,6 @@ const SearchResult = ({ searchResult, selectVideo }) => {
       </section>
     </>
   );
-};
+});
 
 export default SearchResult;

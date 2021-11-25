@@ -14,7 +14,7 @@ class Youtube {
           'items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount), id)',
       },
     });
-    return response.data.items;
+    return response?.data?.items;
   }
   // async mostPopular(maxResults) {
   //   return await fetch(
@@ -34,7 +34,7 @@ class Youtube {
         fields: 'items(id(videoId))',
       },
     });
-    return map(response.data.items, 'id.videoId').join();
+    return map(response?.data?.items, 'id.videoId').join();
   }
   // async searchID(maxResults, query) {
   //   return await fetch(
@@ -55,7 +55,8 @@ class Youtube {
         id: videoList,
       },
     });
-    return response.data.items;
+
+    return response?.data?.items;
   }
 
   // async searchVideos(maxResults, videoList) {

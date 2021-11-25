@@ -5,8 +5,9 @@ import styles from './playVideo.module.css';
 import * as functions from '../function/functionBundle';
 import { useContext } from 'react';
 import videoCardContext from '../../contexts/videoCardContext';
+import { memo } from 'react';
 
-const PlayVideo = ({ videos, video, selectVideo }) => {
+const PlayVideo = memo(({ videos, video, selectVideo }) => {
   const [toggle, setToggle] = useState('false');
   const toggleDescription = event => {
     setToggle(!toggle);
@@ -104,6 +105,6 @@ const PlayVideo = ({ videos, video, selectVideo }) => {
       </section>
     )
   );
-};
+});
 
 export default PlayVideo;

@@ -10,6 +10,7 @@ import NotFound from './components/notFound';
 function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [searchList, setSearchList] = useState([]);
+  const [playVideoList, setplayVideoList] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const maxResults = 24;
   const history = useHistory();
@@ -17,33 +18,36 @@ function App({ youtube }) {
     youtube
       .mostPopular(maxResults) //
       .then(videos => setVideos(videos));
-    // document.querySelector('body').scrollTo(0, 0);
   }, [youtube]);
 
   // 검색하고 결과를 받는데, 결과의 id 들을 받아온다.
   const search = useCallback(
-    query => {
+    query =>
       youtube
         .searchID(maxResults, query) //
         .then(result => {
           youtube
             .searchVideos(result) //
             .then(videos => {
-              setSearchList(videos);
-            })
-            .then(history.push('/searchResult'));
-        });
-    },
+              setTimeout(() => {
+                setSearchList(videos);
+                history.push('/searchResult');
+              }, 200);
+            });
+        }),
     [history, youtube],
   );
 
-  const selectVideo = video => {
-    setTimeout(() => {
-      setSelectedVideo(video);
-      history.push('/playVideo');
-    }, 200);
-    console.log('ply');
-  };
+  const selectVideo = useCallback(
+    video => {
+      setTimeout(() => {
+        setSelectedVideo(video);
+        setplayVideoList(searchList);
+        history.push('/playVideo');
+      }, 200);
+    },
+    [history, searchList],
+  );
 
   const goHome = useCallback(() => history.push('/'), [history]);
 
@@ -59,7 +63,7 @@ function App({ youtube }) {
         </Route>
         <Route path="/playVideo">
           <PlayVideo
-            videos={searchList.length > 0 ? searchList : videos}
+            videos={playVideoList.length > 0 ? playVideoList : videos}
             video={selectedVideo}
             selectVideo={selectVideo}
           />
