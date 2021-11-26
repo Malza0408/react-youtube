@@ -1,11 +1,11 @@
-import React, { memo, useContext } from 'react';
+import React, { memo } from 'react';
 import styles from './home.module.css';
 import VideoCard from '../video/videoCard';
 import { generateKey } from '../function/functionBundle';
-import videoCardContext from '../../contexts/videoCardContext';
+import useSetting from '../../hooks/useSetting';
 
 const Home = memo(({ videos, selectVideo }) => {
-  const setting = useContext(videoCardContext);
+  const setting = useSetting();
   return (
     <>
       <section className={styles.home}>

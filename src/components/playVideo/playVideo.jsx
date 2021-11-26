@@ -1,11 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import VideoCard from '../video/videoCard';
 import styles from './playVideo.module.css';
 import * as functions from '../function/functionBundle';
-import { useContext } from 'react';
-import videoCardContext from '../../contexts/videoCardContext';
-import { memo } from 'react';
+import useSetting from '../../hooks/useSetting';
 
 const PlayVideo = memo(({ videos, video, selectVideo }) => {
   const [toggle, setToggle] = useState('false');
@@ -24,7 +22,7 @@ const PlayVideo = memo(({ videos, video, selectVideo }) => {
     window.scrollTo(0, 0);
   });
 
-  const setting = useContext(videoCardContext);
+  const setting = useSetting();
   return (
     video && (
       <section className={styles.playVideo}>

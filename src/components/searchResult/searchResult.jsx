@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import VideoCard from '../video/videoCard';
 import styles from './searchResult.module.css';
 import { generateKey } from '../function/functionBundle';
-import { useContext } from 'react';
-import videoCardContext from '../../contexts/videoCardContext';
-import { memo } from 'react';
+import useSetting from '../../hooks/useSetting';
 
 const SearchResult = memo(({ searchResult, selectVideo }) => {
-  const setting = useContext(videoCardContext);
+  const setting = useSetting();
   return (
     <>
       <section className={styles.searchResult}>
