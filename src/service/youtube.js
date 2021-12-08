@@ -14,6 +14,7 @@ class Youtube {
           'items(snippet(title, thumbnails, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount), id)',
       },
     });
+    console.log(response.data.items[0].statistics);
     return response?.data?.items;
   }
   // async mostPopular(maxResults) {

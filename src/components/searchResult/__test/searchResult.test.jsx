@@ -1,5 +1,5 @@
 import { mount } from 'enzyme';
-import videoCardContext from '../../../contexts/videoCardContext';
+import VideoCardProvider from '../../../providers/videoCardProvider';
 import SearchResult from '../searchResult';
 
 const dummySearch = [
@@ -26,39 +26,15 @@ const dummySearch = [
   },
 ];
 
-const setting = Object.freeze({
-  page: {
-    home: 'home',
-    searchResult: 'searchResult',
-    playVideo: 'playVideo',
-  },
-  thumbSize: {
-    small: 'small',
-    medium: 'medium',
-  },
-  fontSize: {
-    regular: 'regular',
-    small: 'small',
-  },
-  display: {
-    margin: 'margin',
-    none: 'none',
-  },
-  description: {
-    show: 'show',
-    none: 'none',
-  },
-});
-
 const generateKey = jest.fn();
 generateKey.mockReturnValue(Math.random());
 const selectVideo = jest.fn();
 
 const setup = () => {
   return mount(
-    <videoCardContext.Provider value={setting}>
-      <SearchResult searchResult={dummySearch} selectVideo={selectVideo} />
-    </videoCardContext.Provider>,
+    <VideoCardProvider>
+      <SearchResult searchResult={dummySearch} selectVideo={selectVideo} />,
+    </VideoCardProvider>,
   );
 };
 
@@ -70,7 +46,6 @@ describe('searchResult', () => {
   it('비디오를 하나 선택하면 props중 하나인 selectVideo 가 동작한다.', () => {
     const view = setup();
     const list = view.find('.videoCard');
-    // console.log(view.debug());
     list.simulate('click');
     expect(selectVideo).toBeCalledTimes(1);
   });

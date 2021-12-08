@@ -4,6 +4,7 @@ import App from './app';
 import { mount } from 'enzyme';
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
+import VideoCardProvider from './providers/videoCardProvider';
 
 const httpClient = axios.create({
   baseURL: 'https://youtube.googleapis.com/youtube/v3',
@@ -48,7 +49,9 @@ const mockMostPopular = [
 const setup = () => {
   return mount(
     <BrowserRouter>
-      <App youtube={youtube} />
+      <VideoCardProvider>
+        <App youtube={youtube} />
+      </VideoCardProvider>
     </BrowserRouter>,
   );
 };

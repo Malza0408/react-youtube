@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import PlayVideo from '../playVideo';
 import '@fortawesome/fontawesome-free/js/all.js';
-import videoCardContext from '../../../contexts/videoCardContext';
+import VideoCardProvider from '../../../providers/videoCardProvider';
 
 const dummySearch = [
   {
@@ -32,39 +32,15 @@ generateKey.mockReturnValue(Math.random());
 const selectVideo = jest.fn();
 window.scrollTo = jest.fn();
 
-const setting = Object.freeze({
-  page: {
-    home: 'home',
-    searchResult: 'searchResult',
-    playVideo: 'playVideo',
-  },
-  thumbSize: {
-    small: 'small',
-    medium: 'medium',
-  },
-  fontSize: {
-    regular: 'regular',
-    small: 'small',
-  },
-  display: {
-    margin: 'margin',
-    none: 'none',
-  },
-  description: {
-    show: 'show',
-    none: 'none',
-  },
-});
-
 const setup = () => {
   return mount(
-    <videoCardContext.Provider value={setting}>
+    <VideoCardProvider>
       <PlayVideo
         videos={dummySearch}
         video={dummySearch[0]}
         selectVideo={selectVideo}
       />
-    </videoCardContext.Provider>,
+    </VideoCardProvider>,
   );
 };
 
