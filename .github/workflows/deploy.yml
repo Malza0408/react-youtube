@@ -40,7 +40,13 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
-      - run: npm deploy
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
